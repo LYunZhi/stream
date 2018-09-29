@@ -6,12 +6,17 @@ var options = {
   path: '/'
 }
 
-var callback = function() {
-  console.log('In response handler callback')
+var callback = function(response) {
+  console.log('In response handler callback!');
+
+  response.on('data', function(chunk) {
+    console.log('[-- CHUNK OF LENGTH ' + chunk.length + ' --]');
+    console.log(chunk.toString());
+  });
 }
 
-console.log("I'm about to make a request")
+console.log("I'm about to make the request!");
 
-https.request(options, callback).end()
+https.request(options, callback).end();
 
-console.log("I've made the request!")
+console.log("I've made the request!");
